@@ -40,3 +40,28 @@ async function startSensor() {
         console.error(error);
     }
 }
+
+function showOrientation(event) {
+    const alpha = event.alpha;
+    const beta = event.beta;
+    const gamma = event.gamma;
+
+    // センサー情報を取得できない場合
+    if (alpha === null || beta === null || gamma === null) {
+        statusText.textContent = "センサー情報を取得できません";
+        return;
+    }
+
+    // 取得した角度を画面に表示
+    document.getElementById("alpha").textContent =
+        alpha.toFixed(1) + "°";
+
+    document.getElementById("beta").textContent =
+        beta.toFixed(1) + "°";
+
+    document.getElementById("gamma").textContent =
+        gamma.toFixed(1) + "°";
+
+    statusText.textContent = "センサー情報を取得しました";
+}
+

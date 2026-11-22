@@ -35,7 +35,8 @@ async function startSensor() {
         startButton.disabled = true;
 
     } catch (error) {
-        statusText.textContent = "センサーの開始に失敗しました";
+        statusText.textContent =
+            `センサーの開始に失敗しました：${error.name}：${error.message}`;
         console.error(error);
     }
 }

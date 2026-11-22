@@ -1,8 +1,9 @@
+alert("app.js 最新版を読み込みました");
+
 const startButton = document.getElementById("startButton");
 const statusText = document.getElementById("status");
 
 startButton.addEventListener("click", startSensor);
-
 async function startSensor() {
     try {
         // Device Orientation APIが利用可能か確認

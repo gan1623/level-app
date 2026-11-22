@@ -31,3 +31,56 @@ button {
     margin: 10px 0;
     font-size: 18px;
 }
+
+.level {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    margin: 30px auto;
+    border: 4px solid #333;
+    border-radius: 50%;
+    background-color: #e8f5e9;
+    overflow: hidden;
+}
+
+.cross {
+    position: absolute;
+    background-color: #aaa;
+}
+
+.horizontal {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+    left: 0;
+}
+
+.vertical {
+    width: 1px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+}
+
+#bubble {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    background-color: #2196f3;
+    border: 2px solid #1565c0;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+}
+
+#bubble.level-ok {
+    background-color: #4caf50;
+    border-color: #2e7d32;
+}
+
+#levelStatus {
+    font-size: 18px;
+    font-weight: bold;
+}

@@ -1,7 +1,9 @@
-alert("app.js 最新版を読み込みました");
+// alert("app.js 最新版を読み込みました");
 
 const startButton = document.getElementById("startButton");
 const statusText = document.getElementById("status");
+const bubble = document.getElementById("bubble");
+const levelStatus = document.getElementById("levelStatus");
 
 startButton.addEventListener("click", startSensor);
 async function startSensor() {
@@ -47,15 +49,15 @@ function showOrientation(event) {
     const beta = event.beta;
     const gamma = event.gamma;
 
-    // センサー情報を取得できない場合
-    if (alpha === null || beta === null || gamma === null) {
+    // 傾き情報を取得できない場合
+    if (beta === null || gamma === null) {
         statusText.textContent = "センサー情報を取得できません";
         return;
     }
 
-    // 取得した角度を画面に表示
+    // センサー情報を画面に表示
     document.getElementById("alpha").textContent =
-        alpha.toFixed(1) + "°";
+        alpha === null ? "---" : alpha.toFixed(1) + "°";
 
     document.getElementById("beta").textContent =
         beta.toFixed(1) + "°";
@@ -63,6 +65,34 @@ function showOrientation(event) {
     document.getElementById("gamma").textContent =
         gamma.toFixed(1) + "°";
 
+    // 傾き角度を移動距離に変換
+    let x = gamma * 2;
+    let y = beta * 2;
+
+    // 円形の移動範囲に制限
+    const distance = Math.sqrt(x * x + y * y);
+    const maxDistance = 100;
+
+    if (distance > maxDistance) {
+        x = x * maxDistance / distance;
+        y = y * maxDistance / distance;
+    }
+
+    // 円の表示位置を更新
+    bubble.style.transform =
+        `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+
+    // 水平状態の判定
+    const isLevel =
+        Math.abs(beta) <= 3 && Math.abs(gamma) <= 3;
+
+    if (isLevel) {
+        bubble.classList.add("level-ok");
+        levelStatus.textContent = "水平状態：水平です";
+    } else {
+        bubble.classList.remove("level-ok");
+        levelStatus.textContent = "水平状態：傾いています";
+    }
+
     statusText.textContent = "センサー情報を取得しました";
 }
-
